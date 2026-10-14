@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: var(--font-rye), "Georgia", serif;
+  --font-cond: var(--font-saira), "Arial Narrow", sans-serif;
+  --font-type: var(--font-typewriter), "Courier New", monospace;
+
+  --color-night: #120d08;
+  --color-panel: #1c1410;
+  --color-panel2: #261b12;
+  --color-line: #3a2b1b;
+  --color-line2: #54401f;
+  --color-brand: #e0a458;
+  --color-brand2: #c97f2e;
+  --color-cream: #f0e4c6;
+  --color-paper: #efe2c2;
+  --color-ink: #2a1d10;
+  --color-mute: #a68d6b;
+  --color-mute2: #7d6a50;
+  --color-brick: #c24a2e;
+  --color-sage: #98a86b;
+  --color-sky2: #6f9cab;
+
+  --shadow-ticket: 0 24px 60px -24px rgb(0 0 0 / 0.75);
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  color: var(--color-cream);
+  background-color: var(--color-night);
+  background-image:
+    radial-gradient(1200px 700px at 75% -15%, rgb(224 164 88 / 0.09), transparent 60%),
+    radial-gradient(900px 600px at -10% 110%, rgb(194 74 46 / 0.07), transparent 55%),
+    repeating-linear-gradient(
+      90deg,
+      rgb(0 0 0 / 0.35) 0 2px,
+      transparent 2px 140px
+    );
+  background-attachment: fixed;
+}
+
+/* grain de filme por cima de tudo */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: -100%;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain-shift 0.9s steps(4) infinite;
+}
+
+@keyframes grain-shift {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-2%, 1%); }
+  50% { transform: translate(1%, -2%); }
+  75% { transform: translate(-1%, 2%); }
+  100% { transform: translate(2%, -1%); }
+}
+
+/* papel de talão — simples e limpo */
+.ticket {
+  background:
+    radial-gradient(600px 260px at 50% -18%, rgb(255 255 255 / 0.45), transparent 55%),
+    linear-gradient(180deg, #f2e7cb 0%, #e9d7ae 100%);
+  color: var(--color-ink);
+  border-radius: 16px;
+  border: 1px solid rgb(42 29 16 / 0.18);
+  box-shadow: var(--shadow-ticket);
+}
+
+.dash-line {
+  background-image: linear-gradient(
+    to right,
+    rgb(42 29 16 / 0.45) 55%,
+    transparent 45%
+  );
+  background-size: 12px 1px;
+  background-repeat: repeat-x;
+  height: 1px;
+}
+
+/* scrollbar western */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #3a2b1b;
+  border-radius: 8px;
+  border: 2px solid var(--color-night);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #54401f;
+}
+
+/* seleção */
+::selection {
+  background: rgb(224 164 88 / 0.35);
+  color: #fff5e0;
+}
+
+/* cantos entalhados para cartões especiais */
+.notch {
+  clip-path: polygon(
+    10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px
+  );
+}
+
+/* carimbo PAGO */
+.stamp {
+  border: 3px solid currentColor;
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+  border-radius: 10px;
+  opacity: 0.92;
+}
+
+input[type="range"].range-brand {
+  accent-color: var(--color-brand2);
+}
+
+.no-spinner::-webkit-outer-spin-button,
+.no-spinner::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.no-spinner {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
